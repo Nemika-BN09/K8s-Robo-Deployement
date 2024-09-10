@@ -1,0 +1,27 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata:
+  name: roboshop-user-deployment
+  namespace: production-ns
+spec:
+  template:
+    metadata:
+      labels: 
+        app: web 
+    spec:
+      containers:
+        - image: clahandevops/clahandevops/user:latest
+          name: user-container
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "150m"
+            limits:
+              memory: "500Mi" 
+              cpu: "250m" 
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
